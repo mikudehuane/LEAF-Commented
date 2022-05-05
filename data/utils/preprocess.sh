@@ -258,7 +258,8 @@ if [ "$CONT_SCRIPT" = true ] && [ ! $TRAIN = "na" ]; then
 fi
 
 # 把输出文件拆分，每张图片数据存为一个 json，每个用户存为一个 index 的 json 文件
-python3 $NAMETAG
+echo 'Splitting data into individual files'
+python3 split_client_data.py $NAMETAG
 
 if [ -z "${NO_CHECKSUM}" ]; then
     echo '------------------------------'
