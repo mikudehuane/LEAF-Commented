@@ -17,31 +17,34 @@ sys.path.append(utils_dir)
 
 import util
 
-parent_path = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
+parent_path = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))  # LEAF/data/femnist/
 
 class_files = []  # (class, file directory)
 write_files = []  # (writer, file directory)
 
-class_dir = os.path.join(parent_path, 'data', 'raw_data', 'by_class')
-rel_class_dir = os.path.join('data', 'raw_data', 'by_class')
+class_dir = os.path.join(parent_path, 'data', 'raw_data', 'by_class')  # 绝对路径
+rel_class_dir = os.path.join('data', 'raw_data', 'by_class')  # 相对 LEAF/ 的路径
 classes = os.listdir(class_dir)
 classes = [c for c in classes if len(c) == 2]
 
 for cl in classes:
-    cldir = os.path.join(class_dir, cl)
-    rel_cldir = os.path.join(rel_class_dir, cl)
+    cldir = os.path.join(class_dir, cl)  # 该类别 cl 数据的绝对路径
+    rel_cldir = os.path.join(rel_class_dir, cl)  # 该类别 cl 数据 相对 LEAF/ 的路径
     subcls = os.listdir(cldir)
-
+    # 文件夹内容为：
+    #   hsf_0  hsf_0.mit  hsf_1  hsf_1.mit  hsf_2  hsf_2.mit  hsf_3  hsf_3.mit  hsf_4  hsf_4.mit
+    #   hsf_6  hsf_6.mit  hsf_7  hsf_7.mit  train_30
+    # 从中选取 hsf_\d/ 的文件夹（存放了一些图片文件）
     subcls = [s for s in subcls if (('hsf' in s) and ('mit' not in s))]
 
     for subcl in subcls:
-        subcldir = os.path.join(cldir, subcl)
-        rel_subcldir = os.path.join(rel_cldir, subcl)
+        subcldir = os.path.join(cldir, subcl)  # 子文件夹绝对路径
+        rel_subcldir = os.path.join(rel_cldir, subcl)  # 子文件夹相对路径
         images = os.listdir(subcldir)
-        image_dirs = [os.path.join(rel_subcldir, i) for i in images]
+        image_dirs = [os.path.join(rel_subcldir, i) for i in images]  # 子文件夹中各个图片的相对路径
 
         for image_dir in image_dirs:
-            class_files.append((cl, image_dir))
+            class_files.append((cl, image_dir))  # 类别与相对路径的对应关系
 
 write_dir = os.path.join(parent_path, 'data', 'raw_data', 'by_write')
 rel_write_dir = os.path.join('data', 'raw_data', 'by_write')
