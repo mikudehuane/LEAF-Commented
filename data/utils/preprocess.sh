@@ -111,6 +111,23 @@ case $key in
 esac
 done
 
+echo preprocess parameters:
+echo NAME: $NAME
+echo SAMPLE: $SAMPLE
+echo IUSER: $IUSER
+echo SFRAC: $SFRAC
+echo MINSAMPLES: $MINSAMPLES
+echo TRAIN: $TRAIN
+echo TFRAC: $TFRAC
+echo SAMPLING_SEED: $SAMPLING_SEED
+echo SPLIT_SEED: $SPLIT_SEED
+echo NO_CHECKSUM: $NO_CHECKSUM
+echo VERIFICATION_FILE: $VERIFICATION_FILE
+echo META_DIR: $META_DIR
+echo CHECKSUM_FNAME: $CHECKSUM_FNAME
+
+exit
+
 # --------------------
 # check if running in verification mode
 
