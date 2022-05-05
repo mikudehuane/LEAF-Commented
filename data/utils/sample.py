@@ -13,6 +13,7 @@ import random
 import time
 
 from collections import OrderedDict
+from pprint import pprint
 
 from constants import DATASETS, SEED_FILES
 from util import iid_divide
@@ -49,7 +50,8 @@ parser.set_defaults(iid=False)
 args = parser.parse_args()
 
 print('------------------------------')
-print('sampling data')
+print('sampling data with arguments:')
+pprint(args.__dict__)  # {'fraction': 1.0, 'iid': False, 'name': 'femnist', 'seed': -1, 'u': 0.01}
 
 parent_path = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
 data_dir = os.path.join(parent_path, args.name, 'data')

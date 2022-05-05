@@ -126,8 +126,6 @@ echo VERIFICATION_FILE: $VERIFICATION_FILE
 echo META_DIR: $META_DIR
 echo CHECKSUM_FNAME: $CHECKSUM_FNAME
 
-exit
-
 # --------------------
 # check if running in verification mode
 
@@ -193,8 +191,10 @@ if [ "$CONT_SCRIPT" = true ] && [ ! $SAMPLE = "na" ]; then
         SEED_ARGUMENT="${SAMPLING_SEED:--1}" 
 
         if [ $SAMPLE = "iid" ]; then
+            echo "Sampling data with iid"
             LEAF_DATA_META_DIR=${META_DIR} python3 sample.py $NAMETAG --iid $IUSERTAG $SFRACTAG --seed ${SEED_ARGUMENT}
         else
+            echo "Sampling data with niid"
             LEAF_DATA_META_DIR=${META_DIR} python3 sample.py $NAMETAG $SFRACTAG --seed ${SEED_ARGUMENT}
         fi
 
@@ -256,6 +256,9 @@ if [ "$CONT_SCRIPT" = true ] && [ ! $TRAIN = "na" ]; then
         cd ../$NAME
     fi
 fi
+
+# 把输出文件拆分，每张图片数据存为一个 json，每个用户存为一个 index 的 json 文件
+python3 $NAMETAG
 
 if [ -z "${NO_CHECKSUM}" ]; then
     echo '------------------------------'
