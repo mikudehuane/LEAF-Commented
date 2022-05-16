@@ -261,6 +261,10 @@ fi
 echo 'Splitting data into individual files'
 python3 split_client_data.py $NAMETAG
 
+# 拼接所有用户的 index
+echo 'Merging index of all data'
+python3 merge_index.py $NAMETAG
+
 if [ -z "${NO_CHECKSUM}" ]; then
     echo '------------------------------'
     echo "calculating JSON file checksums"
