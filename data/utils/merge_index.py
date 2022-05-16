@@ -34,7 +34,7 @@ def main():
             output['train'].extend(data['train'])
             output['test'].extend(data['test'])
 
-    output_path = os.path.join(data_fd, 'all.json')
+    output_path = os.path.join(data_fd, 'clients_split', 'all.json')
     with open(output_path, 'w') as f:
         json.dump(output, f)
 
