@@ -257,13 +257,16 @@ if [ "$CONT_SCRIPT" = true ] && [ ! $TRAIN = "na" ]; then
     fi
 fi
 
-# 把输出文件拆分，每张图片数据存为一个 json，每个用户存为一个 index 的 json 文件
-echo 'Splitting data into individual files'
-python3 split_client_data.py $NAMETAG
+if [ "$NAMETAG" = "femnist" ]; then
+  cd ../utils
+  # 把输出文件拆分，每张图片数据存为一个 json，每个用户存为一个 index 的 json 文件
+  echo 'Splitting data into individual files'
+  python3 split_client_data.py $NAMETAG
 
-# 拼接所有用户的 index
-echo 'Merging index of all data'
-python3 merge_index.py $NAMETAG
+  # 拼接所有用户的 index
+  echo 'Merging index of all data'
+  python3 merge_index.py $NAMETAG
+fi
 
 if [ -z "${NO_CHECKSUM}" ]; then
     echo '------------------------------'
